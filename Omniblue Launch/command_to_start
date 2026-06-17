@@ -1,0 +1,2 @@
+chmod +x "$HOME/Desktop/Omniblue Launch/omniblue_start.sh"
+"$HOME/Desktop/Omniblue Launch/omniblue_start.sh"

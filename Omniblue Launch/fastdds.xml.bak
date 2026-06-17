@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  OmniBlue Fast DDS profile (PC side)
+
+  - Pins discovery to the Omniblue Wi-Fi interface (192.168.0.100).
+  - Disables multicast in favor of explicit unicast peers (fleet-ready).
+  - Add Pi #2 and #3 to <initialPeersList> when those robots come online.
+-->
+<profiles xmlns="http://www.eprosima.com/XMLSchemas/fastRTPS_Profiles">
+    <transport_descriptors>
+        <transport_descriptor>
+            <transport_id>udp_omniblue</transport_id>
+            <type>UDPv4</type>
+            <interfaceWhiteList>
+                <address>192.168.0.100</address>
+            </interfaceWhiteList>
+        </transport_descriptor>
+    </transport_descriptors>
+    <participant profile_name="omniblue_participant" is_default_profile="true">
+        <rtps>
+            <userTransports>
+                <transport_id>udp_omniblue</transport_id>
+            </userTransports>
+            <useBuiltinTransports>false</useBuiltinTransports>
+            <builtin>
+                <initialPeersList>
+                    <locator>
+                        <udpv4>
+                            <address>192.168.0.12</address>  <!-- Pi #1 -->
+                        </udpv4>
+                    </locator>
+                    <!-- Future fleet members:
+                    <locator><udpv4><address>192.168.0.13</address></udpv4></locator>
+                    <locator><udpv4><address>192.168.0.14</address></udpv4></locator>
+                    -->
+                </initialPeersList>
+                <avoid_builtin_multicast>true</avoid_builtin_multicast>
+            </builtin>
+        </rtps>
+    </participant>
+</profiles>
